@@ -38,7 +38,7 @@ model DataEntity {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   userId      String
-  user        UserEntity @relation(fields: [userId], references: [id])
+  user        UserEntity @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("data")
 }
