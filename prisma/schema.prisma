@@ -25,6 +25,8 @@ model UserEntity {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   data      DataEntity[]
+
+  @@map("users")
 }
 
 model DataEntity {
@@ -33,10 +35,12 @@ model DataEntity {
   category    Category?
   content     String
   value       Float 
-  userId      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  userId      String
   user        UserEntity @relation(fields: [userId], references: [id])
+
+  @@map("data")
 }
 
 
