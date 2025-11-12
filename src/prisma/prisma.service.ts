@@ -1,8 +1,16 @@
-import { INestApplication, Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
+import {
+  INestApplication,
+  Injectable,
+  OnModuleInit,
+  OnModuleDestroy,
+} from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 
 @Injectable()
-export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
+export class PrismaService
+  extends PrismaClient
+  implements OnModuleInit, OnModuleDestroy
+{
   async onModuleInit() {
     await this.$connect();
   }
@@ -15,5 +23,12 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
     process.on('beforeExit', async () => {
       await app.close();
     });
+  }
+
+  cleabDb() {
+    return this.$transaction([
+      this.dataEntity.deleteMany(),
+      this.userEntity.deleteMany(),
+    ]);
   }
 }

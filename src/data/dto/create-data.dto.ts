@@ -6,7 +6,6 @@ import {
   IsString,
 } from 'class-validator';
 
-// This enum should be kept in sync with your prisma/schema.prisma
 export enum Category {
   FOOD = 'FOOD',
   TRANSPORTATION = 'TRANSPORTATION',
