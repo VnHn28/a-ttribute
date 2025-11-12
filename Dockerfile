@@ -34,12 +34,12 @@ COPY --from=prod-deps /usr/src/app/node_modules ./node_modules
 COPY --from=builder /usr/src/app/node_modules/.prisma/client ./node_modules/.prisma/client
 # Copy compiled code
 COPY --from=builder /usr/src/app/dist ./dist
-# Copy prisma config
-COPY --from=builder /usr/src/app/prisma.config.ts .
+# # Copy prisma config
+# COPY --from=builder /usr/src/app/prisma.config.ts .
 # Copy prisma schema for migrations
-COPY --from=builder /usr/src/app/db/schema.prisma ./db/schema.prisma
+COPY --from=builder /usr/src/app/prisma/schema.prisma ./prisma/schema.prisma
 # Copy migration files
-COPY --from=builder /usr/src/app/db/migrations ./db/migrations 
+COPY --from=builder /usr/src/app/prisma/migrations ./prisma/migrations 
 # Copy package.json
 COPY --from=builder /usr/src/app/package.json .
 
